@@ -32,7 +32,7 @@ st.markdown("""
 .moon {
     width: 200px;
     height: 200px;
-    background: #f9d423;
+    background: #f0e279;
     border-radius: 50%;
     margin: 0 auto;
     margin-top: 20px;
