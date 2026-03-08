@@ -1,4 +1,4 @@
-#Luna Platform 
+# Luna Platform 
 
 A compassionate platform designed to help university students explore their cognitive patterns (ADHD, Autism, etc.) through gentle interaction and AI-driven insights.
 
