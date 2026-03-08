@@ -21,38 +21,38 @@ def trigger_emergency_email(user_name, contact_name, contact_email):
 
 st.set_page_config(page_title="Safe Space", page_icon="🌿", layout="centered")
 
-# 3. 核心視覺樣式 (LUNA Style) ---
+# 3. core visualization LUNA Style---
 def apply_luna_style():
     st.markdown("""
                 
     
         <style>
-        /* 1. 專門針對側邊欄 (Sidebar) 的文字反白 */
+        /* 1. Sidebar Text Styling (White & Glowing Effect) */
         [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
         [data-testid="stSidebar"] h1, 
         [data-testid="stSidebar"] h2,             
         [data-testid="stSidebar"] h3 {
             color: white !important;
-            text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5); /* 增加一點點發光感，更美觀 */
+            text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
             font-weight: bold;
         }
 
-        /* 2. 順便確保側邊欄的標題 (Hi, Shelly!) 也是白的 */
+        /* 2. Ensure Sidebar Greeting (Hi, xxx!) is White */
         section[data-testid="stSidebar"] .st-emotion-cache-10trblm {
             color: white !important;
         }
-        /* 隱藏最上方白色 Banner */
+        /* Hide Streamlit Top Header & Remove Padding */
         header[data-testid="stHeader"] { display: none !important; }
         .main .block-container { padding-top: 0px !important; }
         
-        /* 全域背景與字體 */
+        /* Global Background Gradient & Typography */
         .stApp {
             background: radial-gradient(circle at 20% 30%, #1a1f3b, #0b0e1f 70%, #000000);
             color: white;
             font-family: 'Poppins', sans-serif;
         }
 
-        /* LUNA 封面容器 */
+        /* LUNA Animated Hero Cover Container */
         .luna-container {
             width: 100%;
             height: 430px;
@@ -85,12 +85,12 @@ def apply_luna_style():
         .x2 { top: 330px; right: 20%; transform: rotate(-10deg); }
         .arrow { position: absolute; font-size: 60px; color: #ff5fa2; top: 360px; left: 15%; transform: rotate(-20deg); z-index: 10; }
 
-        /* 側邊欄與元件美化 */
+        /* Sidebar & Component UI Enhancements */
         [data-testid="stSidebar"] { background-color: #1e2445 !important; border-right: 1px solid rgba(249, 212, 35, 0.2); }
         .stButton>button { width: 100%; border-radius: 20px; border: 1px solid #F9D423; background-color: transparent; color: #F9D423; font-weight: bold; }
         .stButton>button:hover { background-color: #F9D423; color: #1a1f3b; box-shadow: 0 0 20px rgba(249, 212, 35, 0.4); }
         
-        /* 放大 Radio 選項 */
+        /* zoom out Radio option */
         div.row-widget.stRadio > div { flex-direction:row; justify-content: center; gap: 20px; padding: 10px; }
         div[data-testid="stMarkdownContainer"] p { font-size: 1.1rem; color: #ffffff; }
         .stChatMessage { border-radius: 15px; margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05) !important; border: 1px solid rgba(249, 212, 35, 0.1); }
@@ -110,13 +110,13 @@ def apply_luna_style():
 if 'usable_model' not in st.session_state:
     try:
         for m in client.models.list():
-            # 確認模型支援生成內容
+            # check the model
             actions = getattr(m, "supported_actions", []) or getattr(m, "supported_generation_methods", [])
             if "generateContent" in actions:
                 st.session_state.usable_model = m.name.split("/")[-1]
                 break
     except:
-        # 如果偵測失敗，給它一個預設值
+        # if detect failed, it will give gemini-1.5-flas version
         st.session_state.usable_model = "gemini-1.5-flash"
         
 if 'logged_in' not in st.session_state: st.session_state.logged_in = False
@@ -143,7 +143,7 @@ questions = [
 ]
 
 # 6. Navigation Logic ---
-apply_luna_style() # 在頁面最上方套用視覺樣式
+apply_luna_style() 
 
 if not st.session_state.logged_in:
     st.markdown("<h2 style='text-align: center;'>Welcome to Safe Space</h2>", unsafe_allow_html=True)
@@ -196,7 +196,7 @@ else:
                 st.session_state.chat_mode = True
                 st.rerun()
         else:
-            # --- 強化版 Tracking Dashboard (LUNA 樣式融合) ---
+            # Tracking Dashboard--
             st.subheader("📊 Your Emotional Insights")
             avg_score = sum(st.session_state.history) / len(st.session_state.history)
             
@@ -283,5 +283,3 @@ else:
                     "friend_name": fr_name, "friend_phone": fr_phone, "friend_email": fr_email
                 })
                 st.success("Profile updated! 🌿")
-
-# Final combined version by Shelly & Gemini 🌙
