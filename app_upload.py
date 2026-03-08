@@ -253,3 +253,5 @@ else:
                     "friend_name": fr_name, "friend_phone": fr_phone, "friend_email": fr_email
                 })
                 st.success("Profile updated! 🌿")
+                
+# Final updated version by Shelly
