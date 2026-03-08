@@ -6,7 +6,7 @@ from google.genai import types
 from dotenv import load_dotenv # for github reading .env file
 
 # 1. API Configuration---
-load_dotenv()
+load_dotenv("app_key.env")
 
 api_key_from_env = os.getenv("GOOGLE_API_KEY")
 
